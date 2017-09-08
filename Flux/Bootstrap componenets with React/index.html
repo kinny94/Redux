@@ -37,6 +37,15 @@
 				var navClass = 'navbar navbar-expand-md navbar-dark bg-dark mb-4';
 			}
 
+			var homeActive = '';
+			var aboutActive = '';
+
+			if(this.props.page === "home"){
+				homeActive = 'active';
+			}else if(this.props.page === 'about'){
+				aboutActive = 'active';
+			}
+
 			return(
 			<div>
 				<nav className={ navClass }>
@@ -46,11 +55,11 @@
 					</button>
 					<div className="collapse navbar-collapse" id="navbarCollapse">
 						<ul className="navbar-nav mr-auto">
-							<li className="nav-item active">
-								<a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+							<li className={homeActive}>
+								<a onClick={this.props.homeClick} className="nav-link" href="#">Home</a>
 							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="#">Link</a>
+							<li className={aboutActive}>
+								<a onClick={ this.props.aboutClick } className="nav-link" href="#">About</a>
 							</li>
 							<li className="nav-item">
 								<a className="nav-link disabled" href="#">Disabled</a>
@@ -132,10 +141,32 @@
 	
 	var App = React.createClass({
 
+		getInitialState: function(){
+			return {
+				page: 'home'
+			}
+		},
+
+		handleHomeClick: function (){
+			this.setState({
+				page: 'home'
+			});	
+		},
+
+		handleAboutClick: function (){
+			this.setState({
+				page: 'about'
+			});	
+		},
+
 		render: function(){
 			return(
 				<div>
-					<Navbar	color="dark" />,
+					<Navbar	color="dark"
+					page = {this.state.page}
+					homeClick={ this.handleHomeClick}
+					aboutClick={ this.handleAboutClick}
+					/>,
 					<div className="container">
 						<Jumbortron />
 						<PageHome />
