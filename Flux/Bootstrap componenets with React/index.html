@@ -16,11 +16,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
 <script type="text/babel">
 	var Navbar = React.createClass({
+
+		// validation for object type
+		propTypes: {
+			brand: React.PropTypes.string.isRequired
+		},
+
+		getDefaultProps: function(){
+			return {
+				brand: 'My Website',
+				color: 'light'
+			}
+		},
+
 		render: function(){
+
+			if(this.props.color === 'light'){
+				var navClass = 'navbar navbar-expand-md navbar-light bg-light mb-4';
+			}else{
+				var navClass = 'navbar navbar-expand-md navbar-dark bg-dark mb-4';
+			}
+
 			return(
 			<div>
-				<nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-					<a className="navbar-brand" href="#">Top navbar</a>
+				<nav className={ navClass }>
+					<a className="navbar-brand" href="#">{ this.props.brand }</a>
 					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span className="navbar-toggler-icon"></span>
 					</button>
@@ -60,11 +80,19 @@
 	});
 
 	var Footer = React.createClass({
+
+		getDefaultProps: function(){
+			return {
+				website: 'My footer',
+				copy_year: 2017 
+			}
+		},
+
 		render: function(){
 			return(
 				<div className="container">
 					<footer>
-						<p>&copy; 2017 My website, Inc.</p>
+						<p>&copy; { this.props.copy_year } { this.props.website }, Inc.</p>
 					</footer>
 				</div>
 			)
@@ -72,14 +100,29 @@
 	});
 
 	var Jumbortron = React.createClass({
+
+		PropTypes: {
+			heading: React.PropTypes.string,
+			text: React.PropTypes.string,
+			link: React.PropTypes.string
+		},
+
+		getDefaultProps: function(){
+			return {
+				heading: 'Welcome!',
+				text: 'Welcome to my React Website.',
+				link: 'http://google.com'
+			}
+		},
+
 		render: function(){
 			return(
 				<div>
 					<div className="jumbotron">
 						<div className="container">
-							<h1>Hello, world!</h1>
-							<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-							<p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+							<h1>{ this.props.heading }</h1>
+							<p>{ this.props.text }</p>
+							<p><a className="btn btn-primary btn-lg" href="{this.props.link }" role="button">Learn more &raquo;</a></p>
 						</div>
 					</div>
 				</div>
@@ -88,13 +131,14 @@
 	});
 	
 	var App = React.createClass({
+
 		render: function(){
 			return(
 				<div>
-					<Navbar />,
+					<Navbar	color="dark" />,
 					<div className="container">
-						<Jumbortron />,
-						<PageHome />,
+						<Jumbortron />
+						<PageHome />
 						<Footer />
 					</div>
 				</div>
@@ -103,8 +147,8 @@
 	});
 
 	ReactDOM.render(
-	<App />,
-	document.getElementById('app')
+		<App />,
+		document.getElementById('app')
 	);
 </script> 
 
