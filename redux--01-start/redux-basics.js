@@ -28,7 +28,7 @@ const rootReducer = ( state = initialState, action ) => {
 const store = createStore( rootReducer );
 console.log(store.getState());
 
-// Subscriptions - Comes before dispatching actions
+// Subscriptions - Comes before dispatching actions   
 store.subscribe(() => {
     console.log('[Subscription]', store.getState());
 });
