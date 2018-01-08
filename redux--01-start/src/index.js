@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import CounterReducer from './store/reducers/counter';
 import ResultReducer from './store/reducers/result';
@@ -14,7 +14,19 @@ const rootReducer = combineReducers({
     res: ResultReducer
 });
 
-const store = createStore( rootReducer );
+// Middleware
+const logger = store  => {
+    return next => {
+        return action => {
+            console.log( '[ Middleware ] Dispatching', action );
+            const result = next(action);
+            console.log( '[ Mddileware ] next state', store.getState() );
+            return result;
+        }
+    }
+};
+
+const store = createStore( rootReducer, applyMiddleware( logger ) );
 
 //connecting the store to the react application
 ReactDOM.render(<Provider store={ store } ><App /></Provider>, document.getElementById('root'));
