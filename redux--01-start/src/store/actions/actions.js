@@ -31,11 +31,20 @@ export const subtract = ( value ) => {
     };
 };
 
-export const storeResults = ( res ) => {
+export const saveResults = ( res ) => {
     return {
         type: STORE_RESULTS,
         result: res
     };
+}
+
+export const storeResults = ( res ) => {
+
+    return dispatch => {
+        setTimeout( () => {
+            dispatch( saveResults( res ) );
+        }, 2000 );
+    }
 };
 
 export const deleteResults = ( resElId ) => {

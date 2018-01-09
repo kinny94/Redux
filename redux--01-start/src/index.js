@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
 import CounterReducer from './store/reducers/counter';
 import ResultReducer from './store/reducers/result';
@@ -27,7 +28,7 @@ const logger = store  => {
     }
 };
 
-const store = createStore( rootReducer, composeEnhancers( applyMiddleware( logger ) ) );
+const store = createStore( rootReducer, composeEnhancers( applyMiddleware( logger, thunk ) ) );
 
 //connecting the store to the react application
 ReactDOM.render(<Provider store={ store } ><App /></Provider>, document.getElementById('root'));
