@@ -12,7 +12,7 @@ export const storeResults = ( res ) => {
     return ( dispatch, getState ) => {
         setTimeout( () => {
             const oldCounter = getState().ctr .counter;
-            console.log( oldCounter );
+            console.log( oldCounter );    
             dispatch( saveResults( res ) );
         }, 2000 );
     }
