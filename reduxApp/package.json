@@ -11,6 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"redux-devtools-extension": "^2.13.2",
 		"webpack": "^4.4.1",
 		"webpack-cli": "^2.0.13"
 	},
