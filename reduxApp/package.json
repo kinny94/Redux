@@ -12,6 +12,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"redux-devtools-extension": "^2.13.2",
+		"redux-logger": "^3.0.6",
 		"webpack": "^4.4.1",
 		"webpack-cli": "^2.0.13"
 	},
@@ -23,6 +24,10 @@
 		"babel-preset-stage-1": "^6.24.1",
 		"express": "^4.16.3",
 		"nodemon": "^1.17.2",
+		"react": "^16.3.0",
+		"react-dom": "^16.3.0",
+		"react-redux": "^5.0.7",
+		"react-router": "^4.2.0",
 		"redux": "^3.7.2"
 	}
 }
